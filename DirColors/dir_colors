@@ -1,0 +1,31 @@
+# Attribute codes:
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+
+# https://jonasjacek.github.io/colors/
+
+#.sln  38;5;150                   # Set fg color to color 160      
+#.flac 48;5;240                   # Set bg color to color 240
+
+
+# executables (bright green)
+.cmd 01;32
+.exe 01;32
+.com 01;32
+.btm 01;32
+.bat 01;32
+.ps1 01;32
+
+# config files (yellow)
+.json 01;33
+.xml 01;33
+
+# project files
+# magenta
+.sln 01;04;48;5;90
+.csproj 01;04;48;5;90
+
+.cs 38;5;45
+
+DIR 01;04;05;38;5;145
+
+#File 38;5;160
