@@ -86,3 +86,20 @@ function Remove-Duplicates {
 	$FileObject = Get-ChildItem $FilePath
 	(Get-Content $FilePath | Select-Object -Unique) > "$($FileObject.Name)-NoDuplicates.txt"
 }
+
+if ($IsLinux) {
+	function Set-Theme {
+		param (
+			[Parameter(Mandatory)]
+			[ValidateSet('Dark','Light')]
+			[string]
+			$Theme
+		)
+		if ($Theme -eq "Dark") {
+			gsettings set org.gnome.desktop.interface gtk-theme "Yaru-dark"
+		}
+		if ($Theme -eq "Light") {
+			gsettings set org.gnome.desktop.interface gtk-theme "Yaru"
+		}
+	}
+}
