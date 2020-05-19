@@ -58,7 +58,28 @@ function Reset-DatabaseEf {
 	dotnet ef database update
 }
 
-Set-Alias ex { explorer . }
+if ($IsLinux) {
+	# set linux command preferences
+	function ex {
+		xdg-open .
+	}
+}
+elseif ($IsWindows) {
+	# Set windows specific command preferences
+	function ex {
+		explorer .
+	}
+	# linux equivalent commands
+	function which {
+		param(
+			[Parameter(Mandatory = $true)]
+			[string]
+			$CommandName
+		)
+		(Get-Command $CommandName).Path
+	}
+	Set-Alias ll Get-ChildItem
+}
 
 # navigate to a location, execute a command and navigate back.
 function cdc {
@@ -91,7 +112,7 @@ if ($IsLinux) {
 	function Set-Theme {
 		param (
 			[Parameter(Mandatory)]
-			[ValidateSet('Dark','Light')]
+			[ValidateSet('Dark', 'Light')]
 			[string]
 			$Theme
 		)
