@@ -58,6 +58,41 @@ function Reset-DatabaseEf {
 	dotnet ef database update
 }
 
+function Invoke-SubProjectsCommand() {
+	Param(
+		[scriptblock]$command
+	)
+	Get-ChildItem -Directory | ForEach-Object {
+		if (Test-Path .git -PathType Container) {
+			cdc $_ $command
+		}
+	}
+}
+
+function Invoke-PullSubProjects() {
+	Invoke-SubProjectsCommand {
+		Write-Host "Pulling ${$_.Name}" -ForegroundColor Green; git pull
+	}
+}
+
+function Get-ChildBranches() {
+	Invoke-SubProjectsCommand {
+		Write-Host $_.Name -ForegroundColor Green
+		git branch | Select-String "\*"
+	}
+}
+function Set-ChildBranches() {
+	param (
+		[Parameter(Mandatory)]
+		[string]
+		$branchName
+	)
+	Invoke-SubProjectsCommand {
+		Write-Host "Setting ${$_.Name} to $branchName" -ForegroundColor Green
+		git checkout $branchName
+	}
+}
+
 if ($IsLinux) {
 	# set linux command preferences
 	function ex {
