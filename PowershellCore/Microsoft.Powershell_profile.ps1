@@ -63,7 +63,8 @@ function Invoke-SubProjectsCommand() {
 		[scriptblock]$command
 	)
 	Get-ChildItem -Directory | ForEach-Object {
-		if (Test-Path .git -PathType Container) {
+		if (Test-Path $_/.git -PathType Container) {
+			Write-Host $_.Name -ForegroundColor Green
 			cdc $_ $command
 		}
 	}
@@ -71,13 +72,13 @@ function Invoke-SubProjectsCommand() {
 
 function Invoke-PullSubProjects() {
 	Invoke-SubProjectsCommand {
-		Write-Host "Pulling ${$_.Name}" -ForegroundColor Green; git pull
+		Write-Host "Pulling ${$_.Name}" -ForegroundColor Green;
+		git pull
 	}
 }
 
 function Get-ChildBranches() {
 	Invoke-SubProjectsCommand {
-		Write-Host $_.Name -ForegroundColor Green
 		git branch | Select-String "\*"
 	}
 }
