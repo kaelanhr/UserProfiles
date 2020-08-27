@@ -1,10 +1,16 @@
+# Install-Module -Name Terminal-Icons -Repository PSGallery
+# Install-Module -Name BurntToast
+# requires nerd font
+
+
 # import modules
 Import-Module DirColors
 Import-Module posh-git
 Import-Module oh-my-posh
+Import-Module -Name Terminal-Icons
 
 # Dir colors settings
-Update-DirColors ~\dir_colors
+# Update-DirColors ~\dir_colors
 
 # oh my posh settings
 $DefaultUser = 'kaela'
@@ -64,6 +70,7 @@ function Invoke-SubProjectsCommand() {
 	)
 	Get-ChildItem -Directory | ForEach-Object {
 		if (Test-Path .git -PathType Container) {
+			Write-Host $_.Name
 			cdc $_ $command
 		}
 	}
@@ -71,7 +78,7 @@ function Invoke-SubProjectsCommand() {
 
 function Invoke-PullSubProjects() {
 	Invoke-SubProjectsCommand {
-		Write-Host "Pulling ${$_.Name}" -ForegroundColor Green; git pull
+		git pull
 	}
 }
 
