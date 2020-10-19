@@ -25,7 +25,7 @@ Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadlineOption -HistorySavePath C:\temp\history.txt
 Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineOption Colors @{Prediction = "`e[90m" }
+Set-PSReadLineOption Colors @{InlinePrediction = "`e[90m" }
 
 Set-Alias sj Start-Job
 Set-Alias rj Receive-Job
