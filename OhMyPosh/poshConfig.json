@@ -1,0 +1,140 @@
+{
+	"blocks": [
+		{
+			"type": "prompt",
+			"alignment": "left",
+			"segments": [
+				{
+					"type": "os",
+					"style": "powerline",
+					"foreground": "#1A86DB",
+					"background": "#1F1F20",
+					"properties": {
+						"postfix": " \uE0B1",
+						"macos": "mac"
+					}
+				},
+				{
+					"type": "shell",
+					"style": "powerline",
+					"powerline_symbol": "\uE0B0",
+					"foreground": "#1A86DB",
+					"background": "#1F1F20",
+					"properties": {
+						"prefix": " \uFCB5 "
+					}
+				},
+				{
+					"type": "root",
+					"style": "plain",
+					"powerline_symbol": "\uE0B0",
+					"foreground": "#100e23",
+					"background": "#ffe9aa",
+					"properties": {}
+				},
+				{
+					"type": "path",
+					"style": "powerline",
+					"powerline_symbol": "\uE0B0",
+					"foreground": "#C6D7E6",
+					"background": "#61AFEF",
+					"properties": {
+						"folder_icon": "\uF115 ",
+						"folder_separator_icon": "\uE0B1 ",
+						"style": "agnoster"
+					}
+				},
+				{
+					"type": "git",
+					"style": "powerline",
+					"powerline_symbol": "\uE0B0",
+					"foreground": "#282C34",
+					"background": "#98C379",
+					"properties": {
+						"branch_icon": "\uE0A0 ",
+						"status_colors_enabled": true,
+						"color_background": false
+					}
+				},
+				{
+					"type": "python",
+					"style": "powerline",
+					"powerline_symbol": "\uE0B0",
+					"foreground": "#100e23",
+					"background": "#906cff",
+					"properties": {
+						"prefix": " \uE235 "
+					}
+				},
+				{
+					"type": "exit",
+					"style": "powerline",
+					"powerline_symbol": "\uE0B0",
+					"foreground": "#ffffff",
+					"background": "#ff8080",
+					"properties": {
+						"display_exit_code": true,
+						"always_enabled": false,
+						"error_color": "#e91e63",
+						"color_background": true,
+						"prefix": "<#193549>\uE0B0</> \uE23A"
+					}
+				}
+			]
+		},
+		{
+			"type": "prompt",
+			"alignment": "right",
+			"segments": [
+				{
+					"type": "text",
+					"style": "plain",
+					"foreground": "#ffffff",
+					"properties": {
+						"prefix": "",
+						"text": "\uf1d1 "
+					}
+				},
+				{
+					"type": "time",
+					"style": "powerline",
+					"foreground": "#1A86DB",
+					"properties": {
+						"prefix": "[ ",
+						"time_format": "15:04:05",
+						"postfix": " \ue38a ]"
+					}
+				},
+				{
+					"type": "text",
+					"style": "plain",
+					"foreground": "#ffffff",
+					"properties": {
+						"prefix": "",
+						"text": " \uf1d1"
+					}
+				}
+			],
+			"horizontal_offset": 1
+		},
+		{
+			"type": "newline"
+		},
+		{
+			"type": "prompt",
+			"alignment": "left",
+			"segments": [
+				{
+					"type": "text",
+					"style": "plain",
+					"foreground": "#007ACC",
+					"properties": {
+						"prefix": "",
+						"text": "\u276F"
+					}
+				}
+			]
+		}
+	],
+	"final_space": true
+}
