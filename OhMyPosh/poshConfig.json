@@ -87,31 +87,13 @@
 			"alignment": "right",
 			"segments": [
 				{
-					"type": "text",
-					"style": "plain",
-					"foreground": "#ffffff",
-					"properties": {
-						"prefix": "",
-						"text": "\uf1d1 "
-					}
-				},
-				{
 					"type": "time",
 					"style": "powerline",
 					"foreground": "#1A86DB",
 					"properties": {
 						"prefix": "[ ",
 						"time_format": "15:04:05",
-						"postfix": " \ue38a ]"
-					}
-				},
-				{
-					"type": "text",
-					"style": "plain",
-					"foreground": "#ffffff",
-					"properties": {
-						"prefix": "",
-						"text": " \uf1d1"
+						"postfix": " \ue38a ]]"
 					}
 				}
 			],
