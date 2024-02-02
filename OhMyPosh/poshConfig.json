@@ -97,7 +97,7 @@
         {
           "type": "time",
           "style": "powerline",
-          "foreground": "#1A86DB",
+          "foreground": "#61AFEF",
           "template": "[ {{ .CurrentDate | date .Format }} \ue38a ]",
           "properties": {
             "time_format": "15:04:05"
@@ -116,7 +116,7 @@
         {
           "type": "text",
           "style": "plain",
-          "foreground": "#007ACC",
+          "foreground": "#61AFEF",
           "template": "❯ "
         }
       ]
