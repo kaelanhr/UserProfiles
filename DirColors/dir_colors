@@ -3,7 +3,7 @@
 
 # https://jonasjacek.github.io/colors/
 
-#.sln  38;5;150                   # Set fg color to color 160      
+#.sln  38;5;150                   # Set fg color to color 160
 #.flac 48;5;240                   # Set bg color to color 240
 
 

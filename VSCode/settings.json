@@ -1,55 +1,76 @@
 {
-  "breadcrumbs.showClasses": true,
-  "breadcrumbs.showFunctions": true,
-  "breadcrumbs.showInterfaces": true,
-  "breadcrumbs.showMethods": true,
-  "breadcrumbs.enabled": true,
-  "cSpell.allowCompoundWords": false,
-  "diffEditor.ignoreTrimWhitespace": true,
-  "editor.comments.insertSpace": true,
-  "editor.cursorBlinking": "phase",
-  "editor.cursorStyle": "line-thin",
-  "editor.formatOnPaste": true,
-  "editor.smoothScrolling": true,
-  "editor.snippetSuggestions": "inline",
-  "editor.tabCompletion": "on",
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  },
-  "editor.detectIndentation": false,
-  "editor.fontFamily": "Fira Code Retina",
-  "editor.fontLigatures": true,
-  "editor.formatOnSave": true,
-  "editor.insertSpaces": false,
-  "editor.renderWhitespace": "boundary",
-  "editor.suggestSelection": "first",
-  "editor.wordWrap": "on",
-  "files.trimTrailingWhitespace": true,
-  "files.autoSave": "onWindowChange",
-  "files.autoSaveDelay": 100,
-  "git.autofetch": true,
-  "git.confirmSync": false,
-  "git.enableSmartCommit": true,
-  "remote.SSH.showLoginTerminal": true,
-  "terminal.integrated.fontFamily": "Cascadia Code PL",
-  "vsintellicode.typescript.completionsEnabled": true,
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "window.menuBarVisibility": "toggle",
-  "window.zoomLevel": 0,
-  "workbench.colorTheme": "One Dark Pro",
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.statusBar.visible": true,
-  "macros": {
-    "cleanUp": [
-      "editor.action.indentationToTabs",
-      "editor.action.trimTrailingWhitespace",
-      "editor.action.formatDocument"
-    ]
-  },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  }
-  // "window.autoDetectColorScheme": true,
-  // "workbench.preferredDarkColorTheme": "One Dark Pro",
-  // "workbench.preferredLightColorTheme": "Default Light+",
+	"breadcrumbs.showClasses": true,
+	"breadcrumbs.showFunctions": true,
+	"breadcrumbs.showInterfaces": true,
+	"breadcrumbs.showMethods": true,
+	"breadcrumbs.enabled": true,
+	"cSpell.allowCompoundWords": false,
+	"diffEditor.ignoreTrimWhitespace": true,
+	"editor.comments.insertSpace": true,
+	"editor.cursorBlinking": "phase",
+	"editor.cursorStyle": "line-thin",
+	"editor.formatOnPaste": true,
+	"editor.smoothScrolling": true,
+	"editor.snippetSuggestions": "inline",
+	"editor.tabCompletion": "on",
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": true
+	},
+	"editor.detectIndentation": false,
+	"editor.fontFamily": "Fira Code Retina",
+	"editor.fontLigatures": true,
+	"editor.formatOnSave": true,
+	"editor.insertSpaces": false,
+	"editor.renderWhitespace": "boundary",
+	"editor.suggestSelection": "first",
+	"editor.wordWrap": "on",
+	"files.trimTrailingWhitespace": true,
+	"files.autoSave": "onWindowChange",
+	"files.autoSaveDelay": 100,
+	"git.autofetch": true,
+	"git.confirmSync": false,
+	"git.enableSmartCommit": true,
+	"remote.SSH.showLoginTerminal": true,
+	"terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font",
+	"vsintellicode.typescript.completionsEnabled": true,
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	"window.menuBarVisibility": "compact",
+	"workbench.colorTheme": "One Dark Pro",
+	"workbench.iconTheme": "material-icon-theme",
+	"workbench.statusBar.visible": true,
+	"editor.bracketPairColorization.enabled": false,
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"prettier.useTabs": true,
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"terminal.explorerKind": "external",
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		"**/node_modules": true,
+		"**/.vscode": true,
+		"**/.expo": true,
+		"**/.expo-shared": true
+	},
+	"[python]": {
+		"editor.formatOnType": true
+	},
+	"editor.quickSuggestions": {
+		"other": "inline"
+	},
+	"editor.stickyScroll.enabled": true,
+	"diffEditor.codeLens": true,
+	"editor.linkedEditing": true
+	// "window.autoDetectColorScheme": true,
+	// "workbench.preferredDarkColorTheme": "One Dark Pro",
+	// "workbench.preferredLightColorTheme": "Default Light+",
 }

@@ -1,22 +1,18 @@
-# Install-Module -Name Terminal-Icons -Repository PSGallery
-# Install-Module -Name BurntToast
-# requires nerd font
-
-
-# import modules
+# Import modules
 Import-Module DirColors
-Import-Module posh-git
 Import-Module oh-my-posh
+Import-Module posh-git
 Import-Module -Name Terminal-Icons
+Import-Module z
 
 # Dir colors settings
 # Update-DirColors ~\dir_colors
 
+# requires nerd font
 # oh my posh settings
-$DefaultUser = 'kaela'
-Set-Theme Paradox
+# oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\jandedobbeleer.omp.json" | Invoke-Expression
 
-# ps readline settings
+# PS Readline settings
 Remove-PSReadlineKeyHandler -Key Tab
 Set-PSReadlineKeyHandler -Chord Tab -Function Complete
 Set-PSReadlineKeyHandler -Function DeleteCharOrExit -Chord Ctrl+D
@@ -25,16 +21,10 @@ Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadlineOption -HistorySavePath C:\temp\history.txt
 Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineOption Colors @{InlinePrediction = "`e[90m" }
+Set-PSReadLineOption -Colors @{InlinePrediction = "`e[90m" }
 
-Set-Alias sj Start-Job
-Set-Alias rj Receive-Job
-Set-Alias gj Get-Job
-
-# windows terminal setting to allow ctr backspace
-if ($null -ne $env:WT_SESSION ) {
-	Set-PSReadLineKeyHandler -Key Ctrl+h -Function BackwardKillWord
-}
+# Base Alias'
+Set-Alias ll Get-ChildItem
 
 # register dotnet argument completer
 $scriptblock = {
@@ -45,29 +35,82 @@ $scriptblock = {
 }
 Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock $scriptblock
 
-# Creates a folder with a particular name in all sub folders.
-function New-SubFolder {
-	Param(
-		[Parameter(Mandatory = $true)]
-		[string]$folderName
-	)
-	Get-ChildItem -Directory | ForEach-Object {
-		Push-Location $_;
+# Functions
+function Get-Uuid {
+	([guid]::newguid()).Guid | clip
+}
+Set-Alias guid Get-Uuid
 
-		# create the directory if it does not exist.
-		if (!Test-Path -Path ./$folderName) {
-			mkdir $folderName
-		}
+function Open-Explorer {
+	[CmdletBinding()]
+	Param(
+		[Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]$Path = '.'
+	)
+	# If we are a file in a folder then get the containing folder
+	if (-not (Get-Item $Path).PSIscontainer) {
+		$Path = Get-ParentDirectory $Path
+	}
+
+	if ($IsLinux) {
+		xdg-open .
+	}
+	elseif ($IsWindows) {
+		explorer $Path
+	}
+}
+Set-Alias ex Open-Explorer
+
+function which {
+	param(
+		[Parameter(Mandatory = $true)]
+		[string]
+		$CommandName
+	)
+	(Get-Command $CommandName).Path
+}
+
+function m2d() {
+	[CmdletBinding()]
+	Param(
+		[Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)][String]$Path,
+		[Parameter()][switch]$PassThru,
+		[Parameter(Position = 1, Mandatory = $false)][switch]$Open
+	)
+	$Params = @{
+		Path     = $Path
+		PassThru = $PassThru
+	}
+
+	Set-Location @Params
+	if ($Open) { explorer . }
+}
+
+# navigate to a location, execute a command and navigate back.
+function cdc {
+	Param(
+		[string]$path,
+		[scriptblock]$command
+	)
+	$here = Get-Location;
+	Set-Location $path;
+	try {
+		& $command;
+	}
+ finally {
+		Set-Location $here;
 	}
 }
 
-# Hard reset of database using entity framework for the project
-# in the current directory.
-function Reset-DatabaseEf {
-	Remove-Item ./Migrations -Recurse -Force
-	dotnet ef database drop
-	dotnet ef migrations add Initial
-	dotnet ef database update
+function Invoke-GitCommit() {
+	[CmdletBinding()]
+	Param(
+		[Parameter(Position = 0)][string]$commitMessage
+	)
+	git commit -m "[$(Get-GitBranch)] $commitMessage"
+}
+
+function Invoke-GitPushBranch {
+	git push --set-upstream origin $(Get-GitBranch)
 }
 
 function Invoke-SubProjectsCommand() {
@@ -103,72 +146,5 @@ function Set-ChildBranches() {
 	Invoke-SubProjectsCommand {
 		Write-Host "Setting ${$_.Name} to $branchName" -ForegroundColor Green
 		git checkout $branchName
-	}
-}
-
-if ($IsLinux) {
-	# set linux command preferences
-	function ex {
-		xdg-open .
-	}
-}
-elseif ($IsWindows) {
-	# Set windows specific command preferences
-	function ex {
-		explorer .
-	}
-	# linux equivalent commands
-	function which {
-		param(
-			[Parameter(Mandatory = $true)]
-			[string]
-			$CommandName
-		)
-		(Get-Command $CommandName).Path
-	}
-	Set-Alias ll Get-ChildItem
-}
-
-# navigate to a location, execute a command and navigate back.
-function cdc {
-	Param(
-		[string]$path,
-		[scriptblock]$command
-	)
-	$here = Get-Location;
-	Set-Location $path;
-	try {
-		& $command;
-	}
- finally {
-		Set-Location $here;
-	}
-}
-
-# copies the contents of a file into a new file, but without duplicated lines
-function Remove-Duplicates {
-	param (
-		[Parameter(Mandatory = $true)]
-		[string]
-		$Filepath
-	)
-	$FileObject = Get-ChildItem $FilePath
-	(Get-Content $FilePath | Select-Object -Unique) > "$($FileObject.Name)-NoDuplicates.txt"
-}
-
-if ($IsLinux) {
-	function Set-Theme {
-		param (
-			[Parameter(Mandatory)]
-			[ValidateSet('Dark', 'Light')]
-			[string]
-			$Theme
-		)
-		if ($Theme -eq "Dark") {
-			gsettings set org.gnome.desktop.interface gtk-theme "Yaru-dark"
-		}
-		if ($Theme -eq "Light") {
-			gsettings set org.gnome.desktop.interface gtk-theme "Yaru"
-		}
 	}
 }
